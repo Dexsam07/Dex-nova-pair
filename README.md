@@ -1,4 +1,4 @@
-# Levanter Pairing Site Clone
+# Dex-nova Pairing Site ❤️‍🩹
 
 यह एक WhatsApp Multi-Device pairing code generator website है।  
 levanter.site जैसी दिखती और काम करती है।  
