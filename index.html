@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Levanter • Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',
+          }
+        }
+      },
+      daisyui: {
+        themes: ["dark"]
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body { background: #0f0f17; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
+    .sidebar { background: #111827; }
+    .card { background: #1f2937; border: 1px solid #374151; }
+  </style>
+</head>
+<body class="min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 sidebar h-screen p-6 flex flex-col fixed">
+    <div class="flex items-center gap-3 mb-10">
+      <i class="fas fa-robot text-3xl text-indigo-500"></i>
+      <h1 class="text-2xl font-bold gradient-text">LEVANTER</h1>
+    </div>
+
+    <nav class="flex-1 space-y-2">
+      <a href="#" class="flex items-center gap-3 p-3 rounded-lg bg-indigo-600/20 text-indigo-400">
+        <i class="fas fa-home w-5"></i>
+        <span>Home</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800">
+        <i class="fas fa-lock w-5"></i>
+        <span>Session</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800">
+        <i class="fas fa-rocket w-5"></i>
+        <span>Deploy</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800">
+        <i class="fas fa-question-circle w-5"></i>
+        <span>FAQ</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800">
+        <i class="fas fa-cog w-5"></i>
+        <span>Env Vars</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800">
+        <i class="fas fa-puzzle-piece w-5"></i>
+        <span>Plugin</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800">
+        <i class="fas fa-user-circle w-5"></i>
+        <span>Profile Picture</span>
+      </a>
+    </nav>
+
+    <div class="mt-auto">
+      <button class="btn btn-outline w-full gap-2">
+        <i class="fab fa-github"></i>
+        Login with GitHub
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 ml-64 p-8">
+    <header class="mb-10">
+      <h2 class="text-3xl font-bold">Get Started with Levanter.</h2>
+      <p class="text-gray-400 mt-2">Choose your preferred method to link your device.</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Session Card -->
+      <div class="card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center">
+            <i class="fas fa-code text-2xl text-indigo-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Session</h3>
+        </div>
+        <p class="text-gray-400">Create and connect sessions via QR or pairing code.</p>
+        <div class="mt-4 text-right">
+          <span class="text-indigo-400">→</span>
+        </div>
+      </div>
+
+      <!-- Deploy Card -->
+      <div class="card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center">
+            <i class="fas fa-rocket text-2xl text-green-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Deploy</h3>
+        </div>
+        <p class="text-gray-400">Trigger deployments and monitor release status.</p>
+        <div class="mt-4 text-right">
+          <span class="text-green-400">→</span>
+        </div>
+      </div>
+
+      <!-- Env Vars Card -->
+      <div class="card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center">
+            <i class="fas fa-cogs text-2xl text-purple-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Env Vars</h3>
+        </div>
+        <p class="text-gray-400">Manage environment variables securely.</p>
+        <div class="mt-4 text-right">
+          <span class="text-purple-400">→</span>
+        </div>
+      </div>
+
+      <!-- Plugin Card -->
+      <div class="card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center">
+            <i class="fas fa-puzzle-piece text-2xl text-blue-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Plugin</h3>
+        </div>
+        <p class="text-gray-400">Explore and manage your dashboard plugins.</p>
+        <div class="mt-4 text-right">
+          <span class="text-blue-400">→</span>
+        </div>
+      </div>
+
+      <!-- FAQ Card -->
+      <div class="card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-yellow-600/20 rounded-lg flex items-center justify-center">
+            <i class="fas fa-question-circle text-2xl text-yellow-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold">FAQ</h3>
+        </div>
+        <p class="text-gray-400">Find answers to common questions and useful tips.</p>
+        <div class="mt-4 text-right">
+          <span class="text-yellow-400">→</span>
+        </div>
+      </div>
+
+      <!-- Profile Picture Card -->
+      <div class="card rounded-xl p-6 hover:scale-105 transition-transform cursor-pointer">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-pink-600/20 rounded-lg flex items-center justify-center">
+            <i class="fas fa-user-circle text-2xl text-pink-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Profile Picture</h3>
+        </div>
+        <p class="text-gray-400">Pair your device and upload a profile image.</p>
+        <div class="mt-4 text-right">
+          <span class="text-pink-400">→</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Login -->
+    <div class="fixed bottom-6 right-6">
+      <button class="btn btn-primary gap-2 shadow-lg">
+        <i class="fab fa-github"></i>
+        Login with GitHub
+      </button>
+    </div>
+  </main>
+
+</body>
+</html>
