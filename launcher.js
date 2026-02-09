@@ -4,16 +4,20 @@ const { spawnSync, spawn } = require('child_process');
 const { existsSync, writeFileSync } = require('fs');
 const path = require('path');
 
-const SESSION_ID = 'updateThis'; // ←←← YAHAN APNA SESSION_ID PASTE KAR (don't remove quotes or symbol)
+const SESSION_ID = 'updateThis'; // ←←← YAHAN APNA SESSION_ID PASTE KAR DO (don't remove quotes or this symbol)
+// Example: const SESSION_ID = '1~abc123...xyz';
 
 let nodeRestartCount = 0;
 const maxNodeRestarts = 5;
 const restartWindow = 30000; // 30 seconds
 let lastRestartTime = Date.now();
 
+// Folder name changed to dexnova (your bot name)
+const folderName = 'dexnova';
+
 function startNode() {
   const child = spawn('node', ['index.js'], {
-    cwd: 'levanter',
+    cwd: folderName,
     stdio: 'inherit'
   });
 
@@ -27,7 +31,7 @@ function startNode() {
       nodeRestartCount++;
 
       if (nodeRestartCount > maxNodeRestarts) {
-        console.error('Node.js is restarting too frequently. Stopping...');
+        console.error('Node.js restarting too frequently. Stopping...');
         return;
       }
 
@@ -39,7 +43,7 @@ function startNode() {
 
 function startPm2() {
   const pm2 = spawn('yarn', ['pm2', 'start', 'index.js', '--name', 'dex-nova', '--attach'], {
-    cwd: 'levanter',
+    cwd: folderName,
     stdio: ['pipe', 'pipe', 'pipe']
   });
 
@@ -58,7 +62,6 @@ function startPm2() {
     startNode();
   });
 
-  // Detect infinite restarts via stderr
   if (pm2.stderr) {
     pm2.stderr.on('data', (data) => {
       const output = data.toString();
@@ -66,7 +69,7 @@ function startPm2() {
         restartCount++;
         if (restartCount > maxRestarts) {
           console.log('PM2 restarting too much, switching to node...');
-          spawnSync('yarn', ['pm2', 'delete', 'dex-nova'], { cwd: 'levanter', stdio: 'inherit' });
+          spawnSync('yarn', ['pm2', 'delete', 'dex-nova'], { cwd: folderName, stdio: 'inherit' });
           startNode();
         }
       }
@@ -81,12 +84,12 @@ function startPm2() {
 }
 
 function installDependencies() {
-  console.log('Installing dependencies in levanter folder...');
+  console.log(`Installing dependencies in ${folderName} folder...`);
   const installResult = spawnSync(
     'yarn',
     ['install', '--force', '--non-interactive', '--network-concurrency', '3'],
     {
-      cwd: 'levanter',
+      cwd: folderName,
       stdio: 'inherit',
       env: { ...process.env, CI: 'true' }
     }
@@ -96,17 +99,17 @@ function installDependencies() {
     console.error('Dependency installation failed!');
     process.exit(1);
   }
-  console.log('Dependencies installed.');
+  console.log('Dependencies installed successfully.');
 }
 
 function checkDependencies() {
-  if (!existsSync(path.resolve('levanter/package.json'))) {
-    console.error('levanter/package.json not found!');
+  if (!existsSync(path.resolve(`${folderName}/package.json`))) {
+    console.error(`${folderName}/package.json not found!`);
     process.exit(1);
   }
 
   const result = spawnSync('yarn', ['check', '--verify-tree'], {
-    cwd: 'levanter',
+    cwd: folderName,
     stdio: 'inherit'
   });
 
@@ -119,23 +122,23 @@ function checkDependencies() {
 }
 
 function cloneRepository() {
-  console.log('Cloning Dex-Nova (Levanter fork) repository...');
+  console.log('Cloning Dex-Nova repository...');
   const cloneResult = spawnSync(
     'git',
-    ['clone', 'https://github.com/Dexsam07/Dex-nova.git', 'levanter'],
+    ['clone', 'https://github.com/Dexsam07/Dex-nova.git', folderName],
     { stdio: 'inherit' }
   );
 
   if (cloneResult.error || cloneResult.status !== 0) {
-    console.error('Git clone failed!');
+    console.error('Git clone failed! Check your internet or GitHub repo access.');
     process.exit(1);
   }
 
-  const configPath = path.join('levanter', 'config.env');
+  const configPath = path.join(folderName, 'config.env');
   try {
     console.log('Creating config.env with SESSION_ID...');
     writeFileSync(configPath, `VPS=true\nSESSION_ID=${SESSION_ID}\n`);
-    console.log('config.env created.');
+    console.log('config.env created successfully.');
   } catch (err) {
     console.error('Failed to write config.env:', err.message);
     process.exit(1);
@@ -145,7 +148,7 @@ function cloneRepository() {
 }
 
 // Main logic
-if (!existsSync('levanter')) {
+if (!existsSync(folderName)) {
   cloneRepository();
   checkDependencies();
 } else {
