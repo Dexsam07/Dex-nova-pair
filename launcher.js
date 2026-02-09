@@ -125,7 +125,7 @@ function cloneRepository() {
   console.log('Cloning Dex-Nova repository...');
   const cloneResult = spawnSync(
     'git',
-    ['clone', 'https://github.com/Dexsam07/Dex-nova.git', folderName],
+    ['clone', 'https://github.com/Dexsam07/Dex-nova-pair.git', folderName],
     { stdio: 'inherit' }
   );
 
