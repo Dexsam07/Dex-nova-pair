@@ -1,26 +1,28 @@
 {
 "name": "dex-pairing-site",
-    "version": "0.0.1",
-    "description": "A multi functional whatsapp bot Web paircode.",
-    "main": "index.js",
-"scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name MANU-MD",
-    "stop": "pm2 stop MANU-MD",
-    "restart": "pm2 restart MANU-MD"
+{
+  "version": "1.0.0",
+  "description": "dex Bot - WhatsApp Pair Code Generator",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
   },
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo 'No build step required'"
+  },
+  "author": "Mr Shyam Hacker",
+  "license": "ISC",
   "dependencies": {
-"@whiskeysockets/baileys": "github:gatanina-li/baileys",
-    "jimp": "^0.16.13",
-    "@adiwajshing/keyed-db": "^0.2.4",
-    "qrcode": "^1.5.4",
-    "awesome-phonenumber": "^7.5.0",
-    "pino": "^8.14.1",
-    "phone" : "3.1.62",
-    "body-parser": "^2.2.0",
-    "express": "^4.19.2",
+    "@whiskeysockets/baileys": "^6.7.21",
+    "awesome-phonenumber": "7.2.0",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
     "path": "^0.12.7",
-    "megajs": "1.3.2",
-    "pm2": "^6.0.8",
-    "async-mutex":"0.5.0"
-   }
+    "phone": "3.1.55",
+    "pino": "9.5.0",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0"
+  }
 }
